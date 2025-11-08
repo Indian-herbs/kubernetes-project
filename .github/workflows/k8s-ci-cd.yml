@@ -30,16 +30,14 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       # FIX: Added required space after 'id:'
-      - name: 4. Define Image Metadata (Tags and Labels)
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          # LOGIC FIX: REPLACE '1shook1/kubernetes-project' with YOUR actual Docker Hub path
-          images: 1shook1/kubernetes-project 
-          tags: |
-            type=sha,format=long # Tag with the full commit SHA
-            type=raw,value=latest,enable={{is_default_branch}} # Tag 'latest' ONLY on the main branch
-
+       - name: 4. Define Image Metadata (Tags and Labels)
+         id: meta
+         uses: docker/metadata-action@v5
+         with:
+           images: 1shook1/kubernetes-project
+           tags: |
+             type=sha,format=long
+             type=raw,value=latest,enable={{is_default_branch}}
       - name: 5. Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
