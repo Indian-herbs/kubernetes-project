@@ -10,10 +10,10 @@ on:
 
 
 jobs:
-	build-and-push-image:
-		runs-on: ubuntu-latest
-		outputs:
-			image_tag: ${{ steps.meta.outputs.tags }}
+	 build-and-push-image:
+		 runs-on: ubuntu-latest
+		 outputs:
+			 image_tag: ${{ steps.meta.outputs.tags }}
 
 
 		steps:
