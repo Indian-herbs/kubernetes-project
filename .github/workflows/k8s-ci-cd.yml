@@ -1,6 +1,3 @@
-# -----------------------------------------------------------
-# CI/CD Pipeline: Build, Push, and Deploy to Kubernetes
-# -----------------------------------------------------------
 name: CI/CD Pipeline for Kubernetes
 
 on:
@@ -15,7 +12,6 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     outputs:
-      # Outputs the final image tag used for deployment
       image_tag: ${{ steps.meta.outputs.tags }}
 
     steps:
@@ -36,7 +32,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           # LOGIC FIX: REPLACE '1shook1/kubernetes-project' with YOUR actual Docker Hub path
-          images: 1shook1/kubernetes-project 
+          images: indian-herbs/kubernetes-project
           tags: |
             type=sha,format=long
             type=raw,value=latest,enable={{is_default_branch}}
