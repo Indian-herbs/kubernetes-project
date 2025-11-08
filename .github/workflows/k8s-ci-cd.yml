@@ -30,12 +30,12 @@ jobs:
 
       - name: 4. Define Image Metadata (Tags and Labels)
         id: meta
-        uses: docker/setup-buildx-action@v5
-        with:
-          images: 1shook1/kubernetes-project
-          tags:
-            type=sha,format=long # Tag with the full commit SHA (e.g., 1shook1/my-app:a7e1f4d9c7e0...)
-            type=raw, value=latest,enable={{is_default_branch}} # Tag 'latest' ONLY on the main branch
+          uses: docker/setup-buildx-action@v5
+          with:
+            images: 1shook1/kubernetes-project
+            tags:
+              type=sha,format=long # Tag with the full commit SHA (e.g., 1shook1/my-app:a7e1f4d9c7e0...)
+              type=raw, value=latest,enable={{is_default_branch}} # Tag 'latest' ONLY on the main branch
 
       - name: 5. Build and Push Docker image
         uses: docker/build-push-action@v5
