@@ -15,7 +15,7 @@ jobs:
       # Outputs the final image tag used for deployment
       image_tag: ${{ steps.meta.outputs.tags }}
 
-    steps:
+  steps:
       - name: 1. Checkout repository
         uses: actions/checkout@v4
 
