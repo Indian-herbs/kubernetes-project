@@ -63,7 +63,7 @@ jobs:
           # This uses the RAW YAML secret, bypassing all Base64 issues
           kubeconfig: ${{ secrets.KUBE_CONFIG_RAW }} 
 
-          context: minikube
+          context: context_info
 
       - name: 3. Deploy to Kubernetes
         uses: Azure/k8s-deploy@v5
