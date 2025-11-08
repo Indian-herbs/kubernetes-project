@@ -65,8 +65,10 @@ jobs:
 
       - name: 3. Deploy to Kubernetes
         uses: Azure/k8s-deploy@v5
+        # FIX: Kubeconfig moved to env block to resolve warnings/errors
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
           manifests: |
             k8s/deployment.yaml
             k8s/service.yaml
