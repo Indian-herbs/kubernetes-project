@@ -59,11 +59,11 @@ jobs:
       - name: 2. Setup Kubectl
         uses: azure/setup-kubectl@v3
 
-      - name: 3. Deploy to Kubernetes
-        uses: Azure/k8s-deploy@v5
-        # FIX: Kubeconfig moved to env block to resolve warnings/errors
-        env:
-          KUBECONFIG_DATA: ${{ secrets.KUBE_CONFIG_RAW }}
+      - name: 2. Set Kubernetes Context (Raw Method)
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_RAW }}
         with:
           manifests: |
             k8s/deployment.yaml
