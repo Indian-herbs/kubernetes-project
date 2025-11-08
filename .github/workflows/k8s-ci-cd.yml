@@ -56,16 +56,22 @@ jobs:
       - name: 1. Checkout repository
         uses: actions/checkout@v4
 
-      - name: 2. Set Kubernetes Context
+      - name: 2. Create Kubeconfig File from Raw Secret
+        # This step uses shell commands to force the raw secret content into a clean file.
+        run: |
+          echo '${{ secrets.KUBE_CONFIG_RAW }}' > /tmp/kubeconfig.yaml
+        shell: bash
+
+      - name: 3. Set Kubernetes Context
         uses: azure/k8s-set-context@v3
         with:
           method: kubeconfig
-          # This uses the RAW YAML secret, bypassing all Base64 issues
-          kubeconfig: ${{ secrets.KUBE_CONFIG_RAW }} 
+          # The action now reads from the clean file we just created
+          kubeconfig: /tmp/kubeconfig.yaml
+          # --- REPLACE THIS ---
+          context: minikube
 
-          context: context_info
-
-      - name: 3. Deploy to Kubernetes
+      - name: 4. Deploy to Kubernetes
         uses: Azure/k8s-deploy@v5
         with:
           manifests: |
